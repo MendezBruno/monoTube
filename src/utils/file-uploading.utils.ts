@@ -1,7 +1,8 @@
 import { extname } from 'path';
 import { HttpException, HttpStatus } from '@nestjs/common';
+import { diskStorage } from 'multer';
 
-export const imageFileFilter = (req, file, callback) => {
+export const videoFileFilter = (req, file, callback) => {
   if (!file.originalname.match(/\.(3gp|mp4|avi)$/)) {
     return callback(
       new HttpException(
@@ -23,3 +24,15 @@ export const editFileName = (req, file, callback) => {
     .join('');
   callback(null, `${name}-${randomName}${fileExtName}`);
 };
+
+export const destination = (req, file, cb) => {
+  cb(null, './uploads');
+};
+
+export const localOptionMulter = {
+  storage: diskStorage({
+    destination: destination,
+    filename: editFileName,
+  }),
+  fileFilter: videoFileFilter,
+}
