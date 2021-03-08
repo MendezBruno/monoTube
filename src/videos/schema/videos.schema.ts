@@ -5,6 +5,9 @@ export type VideoDocument = Video & Document;
 @Schema()
 export class Video {
   @Prop()
+  name: string;
+
+  @Prop()
   audioCodec: string;
 
   @Prop()

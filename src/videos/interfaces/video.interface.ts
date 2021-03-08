@@ -5,4 +5,5 @@ export interface VideoInterface extends Document {
   readonly videoCodec: string;
   readonly duration: number;
   readonly screenshots: string;
+  readonly name: string;
 }
