@@ -24,12 +24,12 @@ export class MediaUtilsService {
     });
   }
 
-  getScreenshot(timeSecond: string, inputPath: string) {
+  getScreenshot(timeSecond: string, inputPath: string, filename: string) {
     const FIRST = 0;
     let thumbnailName: string;
     return new Promise<string>((resolve, reject) => {
       return FfmpegCommand(inputPath)
-        .on('filenames', (filename) => {
+        .on('filenames', (filenames) => {
           thumbnailName = filename;
         })
         .on('end', () => {
@@ -40,7 +40,7 @@ export class MediaUtilsService {
         })
         .screenshots({
           count: 1,
-          filename: '%i.jpg',
+          filename: filename + '_%i.jpg',
           folder: 'uploads/thumbnail',
           timemarks: [timeSecond],
         });

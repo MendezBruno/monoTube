@@ -19,8 +19,17 @@ export class VideosService {
     videoInfo.screenshot = await this.mediaUtilsService.getScreenshot(
       Math.floor(videoInfo.duration).toString(),
       path,
+      file.filename,
     );
     const createdVideo = new this.videoModels(videoInfo);
     return createdVideo.save();
+  }
+
+  getAllVideos() {
+    return this.videoModels.find();
+  }
+
+  async delete(id: any) {
+    return await this.videoModels.findOneAndRemove({ id: id });
   }
 }
